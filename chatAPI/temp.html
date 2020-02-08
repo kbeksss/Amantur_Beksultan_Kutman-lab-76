@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    kkl
+</div>
+<script>
+    let temp = new Date();
+    console.log(temp.toISOString());
+    let date = '2020-02-07T18:55:37.834Z';
+    let date2 = '2020-02-07T18:57:52.994Z';
+    let date3 = '2020-02-07T19:17:25.426Z';
+    let date4 = '2020-02-07T19:20:39.360Z';
+    tempArr = [
+        {first: 'first', datetime: date2},
+        {first: 'second', datetime: date4},
+        {first: 'third', datetime: date3},
+        {first: 'fourth', datetime: date}
+    ];
+    tempArr.sort((a, b) => {
+        if(a.datetime > b.datetime){
+            return 1;
+        } else{
+            return -1;
+        }
+    });
+    console.log(tempArr);
+    let lastThree = tempArr.length < 3 ? tempArr.length : 3;
+    let newArr = tempArr.slice(0, lastThree);
+    console.log(newArr);
+    console.log(tempArr)
+</script>
+</body>
+</html>
