@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import moment from 'moment';
 import {connect} from "react-redux";
-import {fetchMessages, postMessage} from "../../store/actions/messagesActions";
+import {fetchMessages, postMessage, updateMessages} from "../../store/actions/messagesActions";
 
 import {
     Button,
@@ -36,10 +36,20 @@ const Messages = props => {
             alert('Please enter your name or message');
         }
     };
+    const updateAllMessages = async () => {
+        if(props.messages.length){
+            const lastDatetime = props.messages.slice(0, 1)[0].datetime;
+            props.updateMessages(lastDatetime);
+        }
+    };
     useEffect(() => {
         props.fetchMessages();
         // eslint-disable-next-line
     }, []);
+    useEffect(() => {
+        updateAllMessages().catch(e => console.error(e));
+    });
+    console.log(props.messages);
     return (
         <Fragment>
             <Container className='mt-5'>
@@ -81,6 +91,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
     fetchMessages: () => dispatch(fetchMessages()),
-    postMessage: (message) => dispatch(postMessage(message))
+    postMessage: (message) => dispatch(postMessage(message)),
+    updateMessages: datetime => dispatch(updateMessages(datetime)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);
