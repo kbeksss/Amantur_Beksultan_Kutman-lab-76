@@ -1,0 +1,10 @@
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.messages {
+    margin: 40px 0;
+}
+.footer {
+    padding: 15px 0 10px;
+}
