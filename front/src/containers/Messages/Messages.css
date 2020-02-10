@@ -3,8 +3,9 @@
     margin: 0 auto;
 }
 .messages {
-    margin: 40px 0;
+    margin: 40px 0 110px;
 }
 .footer {
-    padding: 15px 0 10px;
+    padding: 30px 0 20px;
+    background: #fff;
 }

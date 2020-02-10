@@ -1,13 +1,12 @@
 import {
-    FETCH_MESSAGES_SUCCESS,
-    POST_MESSAGE_ERROR,
-    POST_MESSAGE_REQUEST,
+    FETCH_MESSAGES_SUCCESS, GET_MESSAGES_BY_DATE_ERROR, GET_MESSAGES_BY_DATE_REQUEST, GET_MESSAGES_BY_DATE_SUCCESS,
+    POST_MESSAGE_ERROR, POST_MESSAGE_REQUEST,
     POST_MESSAGE_SUCCESS
 } from "../actions/messagesActions";
 
 const initialState = {
     messages: [],
-    sending: false,
+    error: null,
 };
 
 const messagesReducer = (state = initialState, action) => {
@@ -20,17 +19,33 @@ const messagesReducer = (state = initialState, action) => {
         case POST_MESSAGE_REQUEST:
             return {
                 ...state,
-                sending: true
+                error: null,
             };
         case POST_MESSAGE_SUCCESS:
             return {
                 ...state,
-                sending: false
+                error: null
             };
         case POST_MESSAGE_ERROR:
             return {
                 ...state,
-                sending: false,
+                error: action.error
+            };
+        case GET_MESSAGES_BY_DATE_REQUEST:
+            return {
+                ...state,
+                error: null,
+            };
+        case GET_MESSAGES_BY_DATE_SUCCESS:
+            return {
+                ...state,
+                messages: [...action.messages, ...state.messages],
+                error: null
+            };
+        case GET_MESSAGES_BY_DATE_ERROR:
+            return {
+                ...state,
+                error: action.e
             };
         default:
             return state;

@@ -45,6 +45,10 @@ module.exports = {
         });
         return newData.slice(0, lastThirty);
     },
+    async getUpdatedMessages(datetime){
+        let allData = data.map(m => ({...m, datetime: new Date(m.datetime).getTime()}));
+        return allData.filter(message => (message.datetime > new Date(datetime).getTime())).map(m => ({...m, datetime: new Date(m.datetime)}));
+    },
     async addMessage(message){
         const date = new Date();
         message.datetime = date.toISOString();
@@ -55,6 +59,7 @@ module.exports = {
     async save(){
         const fileContents = JSON.stringify(data, null, 2);
         await writeFile(filename, fileContents);
-    }
+    },
+
 
 };
